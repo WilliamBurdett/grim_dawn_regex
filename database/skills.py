@@ -17,5 +17,11 @@ base_skills = {
     "call of the grave": [],
     "mark of torment": [],
     "foul eruption": [],
+    "master of death": [],
     "summon hellhound": ["ember claw", "hellfire", "infernal breath"],
+    "summon blight fiend": ["rotting fumes", "blight burst"],
+    "bonds of bysmiel": ["manipulation"],
+    "devouring swarm": [],
+    "conjure primal spirit": [],
+    "summon briarthorn": ["emboldening presence", "ground slam"],
 }

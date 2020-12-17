@@ -4,8 +4,9 @@ def add_elemental(input_type: list):
             input_type.append("elemental")
 
 
-def calculate_damage_types(input_type: str):
-    all_types = ["all", input_type]
+def calculate_damage_types(damage_types: list):
+    all_types = ["all"]
+    all_types.extend(damage_types)
     add_elemental(all_types)
     return all_types
 

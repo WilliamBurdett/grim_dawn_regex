@@ -8,37 +8,43 @@ level = "l: (9)(\d)"
 
 
 def main():
-    damage_type = "vitality"
+    damage_types = ["bleeding", "physical"]
     convert_from_types = []
     classes = [
-        "necromancer",
+        "shaman",
         "occultist"
     ]
     skills = [
-        "summon hellhound",
-        "raise skeletons",
+        "summon briarthorn",
+        "devouring swarm",
+        "conjure primal spirit",
+        "bonds of bysmiel",
     ]
     damage_source = check_damage_source("pet")
 
-    damage_types = calculate_damage_types(damage_type)
+    calculate_damage_types(damage_types)
 
     add_elemental(convert_from_types)
 
     add_skills_from_classes(skills, classes)
     extend_skills(skills)
+    skills.extend(classes)
 
     if damage_source == "retaliation":
         print(f"/retaliation{any_char}({'|'.join(skills)}){any_char}{level}/")
         print(f"/retaliation{any_char}{level}/")
+        print(f"/({'|'.join(damage_types)}) damage{any_char}{level}/")
     elif damage_source == "player":
         print(f"/({'|'.join(damage_types)}) damage{return_char}{any_char}({'|'.join(skills)}){return_char}{any_char}{level}/")
         print(f"/({'|'.join(damage_types)}) damage{any_char}{level}/")
+        print(f"/({'|'.join(damage_types)}) damage{any_char}{level}/")
     elif damage_source == "pet":
         print(f"/({'|'.join(skills)}){return_char}{any_char}bonus to all pets{any_char}({'|'.join(damage_types)}) damage{return_char}{any_char}{level}/")
-        print(f"/bonus to all pets{any_char}({'|'.join(damage_types)}) damage{return_char}{any_char}{level}")
+        print(f"/({'|'.join(skills)}){return_char}{any_char}bonus to all pets{any_char}{level}/")
+        print(f"/bonus to all pets{any_char}({'|'.join(damage_types)}) damage{return_char}{any_char}{level}/")
+        print(f"/bonus to all pets{any_char}{level}/")
 
     print(f"/(all skills{return_char})|({classes[0]}{any_char}{classes[1]})|({classes[1]}{any_char}{classes[0]})/")
-    print(f"/({'|'.join(damage_types)}) damage{any_char}{level}/")
     if len(convert_from_types) > 0:
         print(f"/({'|'.join(convert_from_types)}) damage converted to {damage_type} damage{return_char}{any_char}{level}/")
 
