@@ -9,4 +9,5 @@ def add_skills_from_classes(skills, classes):
 
 def extend_skills(skills):
     for skill in list(skills):
-        skills.extend(base_skills[skill])
+        if skill in base_skills:
+            skills.extend(base_skills[skill])
