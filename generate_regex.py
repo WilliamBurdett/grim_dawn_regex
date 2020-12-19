@@ -4,24 +4,21 @@ from utils.damage_type_parsers import (
     calculate_damage_types,
     add_elemental,
 )
-
-
-return_char = "\\n"
-any_char = f"(.|{return_char})*"
-level = f"{any_char}l: (9)(\d)"
+from utils.output_messages import retaliation_messages, player_messages, pet_messages, return_char, \
+    add_both_skills_message, add_convert_types_message
 
 
 def main():
-    damage_types_list = ["cold"]
+    damage_types_list = ["physical"]
     convert_from_types_list = []
     classes_list = [
-        "nightblade",
-        "arcanist"
+        "soldier",
+        "oathkeeper"
     ]
     skills_list = [
-        "merciless repertoire",
-        "star pact",
-        "blade spirit",
+        "blitz",
+        "shattering smash",
+        "oleron's rage",
     ]
     damage_source = check_damage_source("player")
 
@@ -37,92 +34,11 @@ def main():
     damage_types = "|".join(damage_types_list)
     convert_from_types = "|".join(convert_from_types_list)
 
-    output = []
+    messages = {"retaliation": retaliation_messages, "player": player_messages, "pet": pet_messages}
 
-    if damage_source == "retaliation":
-        output.append(
-            {
-                "message_type": "skills and damage",
-                "message": f"/retaliation{any_char}({skills}){level}/",
-            }
-        )
-        output.append(
-            {
-                "message_type": "damage",
-                "message": f"/retaliation{any_char}({damage_types}){level}/",
-            }
-        )
-        output.append(
-            {
-                "message_type": "skills",
-                "message": f"/retaliation{any_char}({skills}){level}/",
-            }
-        )
-        output.append(
-            {
-                "message_type": "any retaliation",
-                "message": f"/retaliation{level}/"
-            }
-        )
-    elif damage_source == "player":
-        output.append(
-            {
-                "message_type": "skill and damage",
-                "message": f"/({damage_types}) damage{return_char}{any_char}({skills}){return_char}{level}/",
-            }
-        )
-        output.append(
-            {
-                "message_type": "damage",
-                "message": f"/({damage_types}) damage{level}/",
-            }
-        )
-    elif damage_source == "pet":
-        insert = "bonus to all pets"
-        output.append(
-            {
-                "message_type": "skill and damage",
-                "message": f"/({skills}){return_char}{any_char}{insert}{any_char}({damage_types}) damage{return_char}{level}/",
-            }
-        )
-        output.append(
-            {
-                "message_type": "skills",
-                "message": f"/({skills}){return_char}{any_char}{insert}{level}/",
-            }
-        )
-        output.append(
-            {
-                "message_type": "damage",
-                "message": f"/{insert}{any_char}({damage_types}) damage{return_char}{level}/",
-            }
-        )
-        output.append(
-            {
-                "message_type": "any pets",
-                "message": f"/{insert}{level}/"
-            }
-        )
-
-    output.append(
-        {
-            "message_type": "get +skills to both classes",
-            "message": f"/((all skills{return_char})|({classes_list[0]}{any_char}{classes_list[1]})|({classes_list[1]}{any_char}{classes_list[0]})){level}/",
-        }
-    )
-    if len(convert_from_types) > 0:
-        output.append(
-            {
-                "message_type": "convert",
-                "message": f"/({convert_from_types}) damage converted to {damage_types} damage{return_char}{level}/",
-            }
-        )
-        output.append(
-            {
-                "message_type": "convert no level",
-                "message": f"/({convert_from_types}) damage converted to {damage_types} damage{return_char}/",
-            }
-        )
+    output = messages[damage_source](skills, damage_types)
+    add_both_skills_message(output, classes_list)
+    add_convert_types_message(output, convert_from_types, damage_types)
 
     for item in output:
         message_type = item["message_type"]

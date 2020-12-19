@@ -14,5 +14,13 @@ base_skills = {
     "wendigo totem": ["blood pact"],
     "grasping vines": ["entangling vines"],
     "veil of shadow": ["night's chill"],
-    "pneumatic burst": ["shadow dance", "elemental awakening"]
+    "pneumatic burst": ["shadow dance", "elemental awakening"],
+    "blitz": ["blindside"],
+    "maiven's sphere of protection": ["conversion"],
+    "mortar trap": ["heavy ordnance", "the big one"],
+    "canister bomb": ["improved casing", "ulzuin's chosen"],
+    "grenado": ["high impact", "shattering blast", "ulzuin's chosen"],
+    "stun jacks": ["full spread", "ulzuin's chosen"],
+    "phantasmal blades": ["heart seeker", "nether edge"],
+    "thermite mine": ["hellfire mine"],
 }

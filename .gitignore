@@ -6,3 +6,6 @@ venv
 
 # Python compiled
 *.pyc
+.pyc
+
+__pycache__/
